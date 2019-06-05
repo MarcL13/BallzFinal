@@ -5,15 +5,15 @@ public class Brick extends JButton implements Updatable
 {
 
 	private JButton brick;
-	private int level = 1;
+	private int level;
 	private int hp;
 	
 	
-	public Brick()
+	public Brick(int level)
 	{
 //		brick = new JButton();
 //		setPreferredSize(new Dimension(75,50));
-		
+		this.level = level;
 		double test = Math.random();
 		if(test < .2)
 		{
@@ -26,7 +26,6 @@ public class Brick extends JButton implements Updatable
 		
 		brick = new JButton("Test");
 		setPreferredSize(new Dimension(75,50));
-		
 		
 		setVisible(true);
 		setEnabled(false);

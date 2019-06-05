@@ -24,6 +24,7 @@ public class BallzMain extends JFrame implements ActionListener, Updatable
 	private ArrayList<Brick> bricks;
 	private ArrayList<AddBalls> addBalls;
 	private Timer t1;
+	private int level = 1;
 	
 	public BallzMain()
 	{
@@ -70,9 +71,9 @@ public class BallzMain extends JFrame implements ActionListener, Updatable
 //				test.setEnabled(false);
 //				add(test);
 				
-				Brick brick = new Brick();
+				Brick brick = new Brick(level);
 				brick.setBounds((i*70), 20, 65, 40);
-				brick.drawText();
+				brick.setText("" + brick.getHP());
 				add(brick);
 				bricks.add(brick);
 				
@@ -218,7 +219,7 @@ public class BallzMain extends JFrame implements ActionListener, Updatable
 				
 				for(Brick br : bricks)
 				{
-					br.update();	
+					br.update();
 				}
 				for(int a = 0; a < addBalls.size(); a++)
 				{
@@ -237,9 +238,9 @@ public class BallzMain extends JFrame implements ActionListener, Updatable
 					random = Math.random();
 					if(random < .6)
 					{
-						Brick brick = new Brick();
+						Brick brick = new Brick(level);
 						brick.setBounds((r*70), 20, 65, 40);
-						brick.drawText();
+						brick.setText("" + brick.getHP());
 						add(brick);
 						bricks.add(brick);
 					}
@@ -256,7 +257,6 @@ public class BallzMain extends JFrame implements ActionListener, Updatable
 			{
 				balls.get(i).setDy(-((balls.get(i)).getDy()));
 			}
-		
 		}
 		
 		
@@ -272,6 +272,7 @@ public class BallzMain extends JFrame implements ActionListener, Updatable
 					balls.get(j).setDx(-(balls.get(j).getDx()));
 					balls.get(j).setDy(-(balls.get(j).getDy()));
 					bricks.get(i).updateHP();
+					bricks.get(i).setText("" + bricks.get(i).getHP());
 					if(bricks.get(i).getHP() == 0)
 					{
 						remove(bricks.get(i));
@@ -279,11 +280,10 @@ public class BallzMain extends JFrame implements ActionListener, Updatable
 						repaint();
 					}
 				}
-				
 			}
 		}
 		
-		
+	
 		
 		
 //		for(Ball b : balls)
