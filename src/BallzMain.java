@@ -225,7 +225,8 @@ public class BallzMain extends JFrame implements ActionListener, Updatable
 				{
 					addBalls.get(a).update();
 					repaint();
-					
+					//addBalls.get(a).setLocation(addBalls.get(a).getX(), addBalls.get(a).getY()+45);
+					//addBalls.get(a).repaint();
 				}
 				balls.add(new Ball());
 			}
@@ -244,7 +245,7 @@ public class BallzMain extends JFrame implements ActionListener, Updatable
 						add(brick);
 						bricks.add(brick);
 					}
-					else if(.6<=random && random<=.8)
+					else if(random>=.6 && random<=.8)
 					{
 						AddBalls addB = new AddBalls((r)*70,25);
 						addBalls.add(addB);
