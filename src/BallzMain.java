@@ -64,7 +64,7 @@ public class BallzMain extends JFrame implements ActionListener, Updatable
 		for(int i=1;i<8;i++)
 		{
 			random = Math.random();
-			if(random<.4)
+			if(random<.6)
 			{
 //				JButton test = new JButton("");
 //				test.setBounds((i*70), 20, 65, 40);
@@ -79,7 +79,7 @@ public class BallzMain extends JFrame implements ActionListener, Updatable
 				
 			}
 			
-			else if(.4<=random && random<=.6)
+			else if(.6<=random && random<=.8)
 			{
 				AddBalls addB = new AddBalls((i)*70,25);
 				addBalls.add(addB);
@@ -174,25 +174,25 @@ public class BallzMain extends JFrame implements ActionListener, Updatable
 //		
 //		}
 		
-		for(int i = 0; i < balls.size()-1; i++)
+		for(int i = 0; i < balls.size(); i++)
 		{
 			balls.get(i).update();
-			if(balls.get(i).getY() <= 325 && balls.size() > 1)
-			{
-				balls.get(i+1).update();
-			}
+//			if(balls.get(i).getY() <= 325 && balls.size() > 1)
+//			{
+//				balls.get(i+1).update();
+//			}
 		}
 		
-		//adding a new ball at end of round
-		for(int i = balls.size() - 1; i>balls.size() - 2; i--)
-		{
-			if(balls.get(i).getY() >= 350)
-			{
-				Ball newBall = new Ball(balls.get(i).getX(), balls.get(i).getY());
-				add(newBall);
-				balls.add(newBall);
-			}
-		}
+//		//adding a new ball at end of round
+//		for(int i = balls.size() - 1; i>balls.size() - 2; i--)
+//		{
+//			if(balls.get(i).getY() >= 350)
+//			{
+//				Ball newBall = new Ball(balls.get(i).getX(), balls.get(i).getY());
+//				add(newBall);
+//				balls.add(newBall);
+//			}
+//		}
 		
 		//collision with walls
 		for(int i = 0; i < balls.size(); i++)
@@ -212,6 +212,8 @@ public class BallzMain extends JFrame implements ActionListener, Updatable
 				for(Brick br : bricks)
 				{
 					br.update();
+					
+					
 				}
 				for(AddBalls ab : addBalls)
 				{
@@ -219,6 +221,29 @@ public class BallzMain extends JFrame implements ActionListener, Updatable
 				}
 				balls.add(new Ball());
 			}
+			if(((balls.get(i)).getY() >= 350))
+			{
+				double random = 0;
+				for(int r = 1; r < 8; r++)
+				{
+					random = Math.random();
+					if(random < .6)
+					{
+						Brick brick = new Brick();
+						brick.setBounds((r*70), 20, 65, 40);
+						brick.drawText();
+						add(brick);
+						bricks.add(brick);
+					}
+					else if(.6<=random && random<=.8)
+					{
+						AddBalls addB = new AddBalls((r)*70,25);
+						addBalls.add(addB);
+						add(addB);
+					}
+				}
+			}
+			
 			if(balls.get(i).getY() <= 0)
 			{
 				balls.get(i).setDy(-((balls.get(i)).getDy()));
@@ -229,6 +254,45 @@ public class BallzMain extends JFrame implements ActionListener, Updatable
 		
 		
 		//checking for collision with bricks
+		for(int i = bricks.size() - 1; i >= 0; i--)
+		{
+			for(int j = 0; j < balls.size(); j++)
+			{
+
+				if(balls.get(j).getX() >= bricks.get(i).getX() && balls.get(j).getY() >= bricks.get(i).getY() && balls.get(j).getX() <= bricks.get(i).getX() + 67 && balls.get(j).getY() <= bricks.get(i).getY() + 42)
+				{
+					balls.get(j).setDx(-(balls.get(j).getDx()));
+					balls.get(j).setDy(-(balls.get(j).getDy()));
+					bricks.get(i).updateHP();
+					if(bricks.get(i).getHP() == 0)
+					{
+						remove(bricks.get(i));
+						bricks.remove(bricks.get(i));
+						repaint();
+					}
+				}
+				
+			}
+		}
+		
+		
+		
+		
+//		for(Ball b : balls)
+//		{
+//			
+//			
+//			
+//			b.updateBrick(bricks);
+//			for(int i = bricks.size() - 1; i >= 0; i--)
+//			{
+//				if(bricks.get(i).getHP() == 0)
+//				{
+//					remove(bricks.get(i));
+//					bricks.remove(bricks.get(i));
+//				}
+//			}
+//		}
 		
 		
 	}

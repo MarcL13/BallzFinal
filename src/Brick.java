@@ -33,6 +33,8 @@ public class Brick extends JButton implements Updatable
 		
 	}
 	
+
+	
 	public void drawText()
 	{
 		brick.setText("" + hp);
@@ -42,7 +44,7 @@ public class Brick extends JButton implements Updatable
 	
 	public void update()
 	{
-		setLocation(getX(), getY() + 25);
+		setLocation(getX(), getY() + 45);
 		level++;
 	}
 	

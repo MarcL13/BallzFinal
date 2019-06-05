@@ -8,7 +8,8 @@ public class Ball extends JComponent
 {
 	private Ellipse2D.Double ball;
 	private int dx = 0, dy = -5;
-	private ArrayList<Ball> balls;
+	private ArrayList<Ball> balls = new ArrayList<Ball>();
+	private ArrayList<Brick> bricks = new ArrayList<Brick>();
 	
 	//for the first ball
 	public Ball(int x, int y)
@@ -26,13 +27,15 @@ public class Ball extends JComponent
 	
 	public void updateBrick(ArrayList<Brick> bricks)
 	{
-		for(Brick b : bricks)
+		for(int i = 0; i < bricks.size(); i++)
 		{
-			for(Ball ball : balls)
+			for(int j = 0; j < balls.size(); j++)
 			{
-				if(b.getX() == ball.getX() && b.getY() == ball.getY())
+				if(balls.get(j).getX() >= bricks.get(i).getX() && balls.get(j).getY() >= bricks.get(i).getY() && balls.get(j).getX() <= bricks.get(i).getX() + 65 && balls.get(j).getY() <= bricks.get(i).getY() + 40)
 				{
-					b.updateHP();
+					
+					bricks.get(i).updateHP();
+					remove(bricks.get(i));
 				}
 			}
 		}
