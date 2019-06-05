@@ -35,6 +35,12 @@ public class BallzMain extends JFrame implements ActionListener, Updatable
 		bricks = new ArrayList<Brick>();
 		addBalls = new ArrayList<AddBalls>();
 		
+		//start with one ball
+		Ball firstBall = new Ball((getWidth()/2), 350);
+		add(firstBall);
+		balls.add(firstBall);
+		
+		
 		JButton fire = new JButton("Press to fire");
 		fire.setBounds(50,415,150,25);
 		add(fire);
@@ -79,6 +85,55 @@ public class BallzMain extends JFrame implements ActionListener, Updatable
 		}
 		
 		
+		fire.addActionListener(new ActionListener()
+				{
+
+					public void actionPerformed(ActionEvent e)
+					{
+						String response = answer.getText();
+						Integer ans = Integer.parseInt(response);
+						
+						fire.setEnabled(false);
+						answer.setText("");
+						answer.setEnabled(false);
+						
+						
+						
+						t1.start();
+						
+						
+							if(ans < 90)
+							{
+								for(Ball ball : balls)
+								{
+									ball.setDx((int)(5*(-Math.cos(ans*((Math.PI)/180)))));
+									ball.setDy((int)(5*(-(Math.sin(ans*((Math.PI)/180))))));
+								}
+							}
+							else if(ans == 90)
+							{
+								for(Ball ball : balls)
+								{
+									ball.setDx(0);
+									ball.setDy(-5);
+								}
+							}
+							else if(ans > 90)
+							{
+								for(Ball ball : balls)
+								{
+									ball.setDx((int)(5*(-Math.cos(ans*((Math.PI)/180)))));
+									ball.setDy((int)(5*(-(Math.sin(ans*((Math.PI)/180))))));
+								}
+							}
+						
+						
+						
+					}
+			
+				});
+		
+		
 		
 		setVisible(true);
 		setDefaultCloseOperation(this.EXIT_ON_CLOSE);
@@ -91,9 +146,33 @@ public class BallzMain extends JFrame implements ActionListener, Updatable
 		
 	}
 
-	@Override
-	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
+	public void actionPerformed(ActionEvent arg0)
+	{
+		for(Ball b : balls)
+		{
+			b.update();
+		}
+		
+		//collision with walls
+		for(int i = 0; i < balls.size(); i++)
+		{
+		
+			if((balls.get(i)).getX() >= getWidth() || (balls.get(i)).getX() <= 0)
+			{
+				(balls.get(i)).setDx(-((balls.get(i)).getDx()));
+				
+			}
+			if(((balls.get(i)).getY() >= 350))
+			{
+				balls.get(i).setDy(0);
+				balls.get(i).setDx(0);
+			}
+			if(balls.get(i).getY() <= 0)
+			{
+				balls.get(i).setDy(-((balls.get(i)).getDy()));
+			}
+		
+		}
 		
 	}
 	
