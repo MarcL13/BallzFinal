@@ -38,6 +38,7 @@ public class AddBalls extends JComponent implements Updatable
 	public void update()
 	{
 		setLocation(getX(), getY() + 45);
+		this.repaint();
 	}
 	
 	public int getX()

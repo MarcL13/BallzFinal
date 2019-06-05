@@ -24,8 +24,6 @@ public class BallzMain extends JFrame implements ActionListener, Updatable
 	private ArrayList<Brick> bricks;
 	private ArrayList<AddBalls> addBalls;
 	private Timer t1;
-	//for adding a delay in between shots in array list
-	private Timer t2;
 	
 	public BallzMain()
 	{
@@ -33,6 +31,7 @@ public class BallzMain extends JFrame implements ActionListener, Updatable
 		setLayout(null);
 		
 		t1 = new Timer(1000/60,this);
+		
 		
 		balls = new ArrayList<Ball>();
 		bricks = new ArrayList<Brick>();
@@ -176,11 +175,18 @@ public class BallzMain extends JFrame implements ActionListener, Updatable
 		
 		for(int i = 0; i < balls.size(); i++)
 		{
-			balls.get(i).update();
-//			if(balls.get(i).getY() <= 325 && balls.size() > 1)
-//			{
-//				balls.get(i+1).update();
-//			}
+			balls.get(0).update();
+			if(balls.size() > 1)
+			{
+				int counter = 0;
+				int delay = t1.getDelay();
+				counter += delay;
+				if(counter > 200)
+				{
+					balls.get(i).update();
+					counter = 0;
+				}
+			}
 		}
 		
 //		//adding a new ball at end of round
@@ -203,6 +209,7 @@ public class BallzMain extends JFrame implements ActionListener, Updatable
 				(balls.get(i)).setDx(-((balls.get(i)).getDx()));
 				
 			}
+			
 			if(((balls.get(i)).getY() >= 350))
 			{
 				balls.get(i).setDy(0);
@@ -219,8 +226,9 @@ public class BallzMain extends JFrame implements ActionListener, Updatable
 					repaint();
 					
 				}
-//				balls.add(new Ball());
+				balls.add(new Ball());
 			}
+			
 			if(((balls.get(i)).getY() >= 350))
 			{
 				double random = 0;
