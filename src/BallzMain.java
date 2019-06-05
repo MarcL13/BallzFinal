@@ -23,13 +23,14 @@ public class BallzMain extends JFrame implements ActionListener, Updatable
 	private ArrayList<Ball> balls;
 	private ArrayList<Brick> bricks;
 	private ArrayList<AddBalls> addBalls;
+	private Timer t1;
 	
 	public BallzMain()
 	{
 		setBounds(400,200,800,500);
 		setLayout(null);
 		
-		Timer t1 = new Timer(1000/60,this);
+		t1 = new Timer(1000/60,this);
 		
 		balls = new ArrayList<Ball>();
 		bricks = new ArrayList<Brick>();
@@ -102,36 +103,45 @@ public class BallzMain extends JFrame implements ActionListener, Updatable
 						t1.start();
 						
 						
-							if(ans < 90)
+						if(ans < 90)
+						{
+							for(Ball ball : balls)
 							{
-								for(Ball ball : balls)
-								{
-									ball.setDx((int)(5*(-Math.cos(ans*((Math.PI)/180)))));
-									ball.setDy((int)(5*(-(Math.sin(ans*((Math.PI)/180))))));
-								}
+								ball.setDx((int)(5*(-Math.cos(ans*((Math.PI)/180)))));
+								ball.setDy((int)(5*(-(Math.sin(ans*((Math.PI)/180))))));
 							}
-							else if(ans == 90)
+						}
+						else if(ans == 90)
+						{
+							for(Ball ball : balls)
 							{
-								for(Ball ball : balls)
-								{
-									ball.setDx(0);
-									ball.setDy(-5);
-								}
+								ball.setDx(0);
+								ball.setDy(-5);
 							}
-							else if(ans > 90)
+						}
+						else if(ans > 90)
+						{
+							for(Ball ball : balls)
 							{
-								for(Ball ball : balls)
-								{
-									ball.setDx((int)(5*(-Math.cos(ans*((Math.PI)/180)))));
-									ball.setDy((int)(5*(-(Math.sin(ans*((Math.PI)/180))))));
-								}
+								ball.setDx((int)(5*(-Math.cos(ans*((Math.PI)/180)))));
+								ball.setDy((int)(5*(-(Math.sin(ans*((Math.PI)/180))))));
 							}
-						
-						
-						
+						}
+					
+					for(int i = balls.size() - 1; i>=balls.size(); i--)
+					{
+						if(balls.get(i).getY() == 350)
+						{
+							fire.setEnabled(true);
+							answer.setEnabled(true);
+						}
 					}
-			
-				});
+							
+							
+						
+				}
+		
+			});
 		
 		
 		
@@ -157,7 +167,7 @@ public class BallzMain extends JFrame implements ActionListener, Updatable
 		for(int i = 0; i < balls.size(); i++)
 		{
 		
-			if((balls.get(i)).getX() >= getWidth() || (balls.get(i)).getX() <= 0)
+			if((balls.get(i)).getX() >= 770 || (balls.get(i)).getX() <= 0)
 			{
 				(balls.get(i)).setDx(-((balls.get(i)).getDx()));
 				
@@ -166,6 +176,15 @@ public class BallzMain extends JFrame implements ActionListener, Updatable
 			{
 				balls.get(i).setDy(0);
 				balls.get(i).setDx(0);
+				t1.stop();
+				for(Brick br : bricks)
+				{
+					br.update();
+				}
+				for(AddBalls ab : addBalls)
+				{
+					ab.update();
+				}
 			}
 			if(balls.get(i).getY() <= 0)
 			{
@@ -173,6 +192,9 @@ public class BallzMain extends JFrame implements ActionListener, Updatable
 			}
 		
 		}
+		
+		//checking for collision with bricks
+		
 		
 	}
 	
