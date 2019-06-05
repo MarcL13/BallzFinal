@@ -10,6 +10,7 @@ public class Ball extends JComponent
 	private int dx = 0, dy = -5;
 	private ArrayList<Ball> balls = new ArrayList<Ball>();
 	private ArrayList<Brick> bricks = new ArrayList<Brick>();
+	private boolean start = false;
 	
 	//for the first ball
 	public Ball(int x, int y)
@@ -39,6 +40,16 @@ public class Ball extends JComponent
 				}
 			}
 		}
+	}
+	
+	public void setStart(boolean start)
+	{
+		this.start = start;
+	}
+	
+	public boolean getStart()
+	{
+		return start;
 	}
 	
 	public void update()
