@@ -42,7 +42,7 @@ public class Brick extends JButton implements Updatable
 	
 	public void update()
 	{
-		setLocation(getX(), getY() + 50);
+		setLocation(getX(), getY() + 25);
 		level++;
 	}
 	

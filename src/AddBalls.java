@@ -18,9 +18,10 @@ public class AddBalls extends JComponent implements Updatable
 	{
 		this.x = x;
 		this.y = y;
-		setBounds(x,y,20,20);
-		this.setPreferredSize(new Dimension(75,50));
-		addBall = new Ellipse2D.Double(0, 0 , 19, 19);
+		setBounds(x,y,19,19);
+//		this.setPreferredSize(new Dimension(75,50));
+		addBall = new Ellipse2D.Double(0, 0 , 20, 20);
+		this.setSize(21, 21);
 	}
 	
 	public void update()
@@ -38,11 +39,11 @@ public class AddBalls extends JComponent implements Updatable
 		return y;
 	}
 		
-	public void paintComponent (Graphics g)
-	{
-		
-		Graphics2D g2 = (Graphics2D) g;
-		g2.draw(addBall);
-		g2.fill(addBall);
-	}
+//	public void paintComponent (Graphics g)
+//	{
+//		
+//		Graphics2D g2 = (Graphics2D) g;
+//		g2.draw(addBall);
+//		g2.fill(addBall);
+//	}
 }

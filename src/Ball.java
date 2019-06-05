@@ -10,12 +10,18 @@ public class Ball extends JComponent
 	private int dx = 0, dy = -5;
 	private ArrayList<Ball> balls;
 	
+	//for the first ball
 	public Ball(int x, int y)
 	{
 		setBounds(x,y,9,9);
 		ball = new Ellipse2D.Double(0,0,10,10);
 		this.setSize(11,11);
+	}
 	
+	public Ball()
+	{
+		ball = new Ellipse2D.Double(0,0,10,10);
+		this.setSize(11,11);
 	}
 	
 	public void updateBrick(ArrayList<Brick> bricks)

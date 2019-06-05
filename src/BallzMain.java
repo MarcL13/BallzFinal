@@ -24,6 +24,8 @@ public class BallzMain extends JFrame implements ActionListener, Updatable
 	private ArrayList<Brick> bricks;
 	private ArrayList<AddBalls> addBalls;
 	private Timer t1;
+	//for adding a delay in between shots in array list
+	private Timer t2;
 	
 	public BallzMain()
 	{
@@ -128,14 +130,8 @@ public class BallzMain extends JFrame implements ActionListener, Updatable
 							}
 						}
 					
-					for(int i = balls.size() - 1; i>=balls.size(); i--)
-					{
-						if(balls.get(i).getY() == 350)
-						{
-							fire.setEnabled(true);
-							answer.setEnabled(true);
-						}
-					}
+					fire.setEnabled(true);
+					answer.setEnabled(true);
 							
 							
 						
@@ -158,9 +154,44 @@ public class BallzMain extends JFrame implements ActionListener, Updatable
 
 	public void actionPerformed(ActionEvent arg0)
 	{
-		for(Ball b : balls)
+//		long timeLast = 
+//		long timeNow = System.currentTimeMillis();
+//		long time = timeNow - timeLast;
+//		for(Ball b : balls)
+//		{
+//			long timeLast = System.tim
+//			long timeNow = System.currentTimeMillis();
+//			long time = timeNow - timeLast;
+//			if (time < 0 && balls.size() > 1 || time > 1000 && balls.size() > 1) 
+//			{
+//				timeLast = timeNow;
+//				b.update();
+//			}
+//			else
+//			{
+//				b.update();
+//			}
+//		
+//		}
+		
+		for(int i = 0; i < balls.size()-1; i++)
 		{
-			b.update();
+			balls.get(i).update();
+			if(balls.get(i).getY() <= 325 && balls.size() > 1)
+			{
+				balls.get(i+1).update();
+			}
+		}
+		
+		//adding a new ball at end of round
+		for(int i = balls.size() - 1; i>balls.size() - 2; i--)
+		{
+			if(balls.get(i).getY() >= 350)
+			{
+				Ball newBall = new Ball(balls.get(i).getX(), balls.get(i).getY());
+				add(newBall);
+				balls.add(newBall);
+			}
 		}
 		
 		//collision with walls
@@ -177,6 +208,7 @@ public class BallzMain extends JFrame implements ActionListener, Updatable
 				balls.get(i).setDy(0);
 				balls.get(i).setDx(0);
 				t1.stop();
+				
 				for(Brick br : bricks)
 				{
 					br.update();
@@ -185,6 +217,7 @@ public class BallzMain extends JFrame implements ActionListener, Updatable
 				{
 					ab.update();
 				}
+				balls.add(new Ball());
 			}
 			if(balls.get(i).getY() <= 0)
 			{
@@ -192,6 +225,8 @@ public class BallzMain extends JFrame implements ActionListener, Updatable
 			}
 		
 		}
+		
+		
 		
 		//checking for collision with bricks
 		
