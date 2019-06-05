@@ -4,7 +4,7 @@ import java.awt.geom.Ellipse2D;
 import java.util.ArrayList;
 import javax.swing.JComponent;
 
-public class Ball extends JComponent
+public class Ball extends JComponent implements Updatable
 {
 	private Ellipse2D.Double ball;
 	private int dx = 0, dy = -5;
@@ -20,12 +20,7 @@ public class Ball extends JComponent
 		this.setSize(11,11);
 	}
 	
-	public Ball()
-	{
-		ball = new Ellipse2D.Double(0,0,10,10);
-		this.setSize(11,11);
-	}
-	
+
 	public void updateBrick(ArrayList<Brick> bricks)
 	{
 		for(int i = 0; i < bricks.size(); i++)
@@ -41,6 +36,7 @@ public class Ball extends JComponent
 			}
 		}
 	}
+
 	
 	public void setStart(boolean start)
 	{

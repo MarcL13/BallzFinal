@@ -27,6 +27,7 @@ public class BallzMain extends JFrame implements ActionListener, Updatable
 	private int level = 1;
 	private int dx;
 	private int dy;
+	private Ball newBall;
 	
 	
 	public BallzMain()
@@ -103,8 +104,6 @@ public class BallzMain extends JFrame implements ActionListener, Updatable
 						answer.setText("");
 						answer.setEnabled(false);
 						
-						
-						
 						t1.start();
 						
 						//click button set a field and first ball = to these values 
@@ -131,8 +130,6 @@ public class BallzMain extends JFrame implements ActionListener, Updatable
 					balls.get(0).setDy(dy);
 					fire.setEnabled(true);
 					answer.setEnabled(true);
-							
-							
 						
 				}
 		
@@ -157,38 +154,28 @@ public class BallzMain extends JFrame implements ActionListener, Updatable
 		balls.get(0).setStart(true);
 		balls.get(0).update();
 
-		if(counter/60 < balls.size() && !balls.get(counter/60).getStart())
+		if(counter/30 < balls.size() && !balls.get(counter/30).getStart())
 		{
-			balls.get(counter/60).setDx(dx);
-			balls.get(counter/60).setDy(dy);
-			balls.get(counter/60).setStart(true);
-			balls.get(counter/60).update();
+			balls.get(counter/30).setDx(dx);
+			balls.get(counter/30).setDy(dy);
+			balls.get(counter/30).setStart(true);
+			balls.get(counter/30).update();
 		}
 		
 		for(Ball b : balls)
 		{
 			if(b.getY() >= 350)
 			{
-				
 				b.setDx(0);
 				b.setDy(0);
 				b.setStart(false);
 			}
 		}
+		
+		
+		
 
-			
 		
-		
-//		//adding a new ball at end of round
-//		for(int i = balls.size() - 1; i>balls.size() - 2; i--)
-//		{
-//			if(balls.get(i).getY() >= 350)
-//			{
-//				Ball newBall = new Ball(balls.get(i).getX(), balls.get(i).getY());
-//				add(newBall);
-//				balls.add(newBall);
-//			}
-//		}
 		
 		//collision with walls
 		for(int i = 0; i < balls.size(); i++)
@@ -217,10 +204,10 @@ public class BallzMain extends JFrame implements ActionListener, Updatable
 				{
 					addBalls.get(a).update();
 					repaint();
-					//addBalls.get(a).setLocation(addBalls.get(a).getX(), addBalls.get(a).getY()+45);
-					//addBalls.get(a).repaint();
+					addBalls.get(a).setLocation(addBalls.get(a).getX(), addBalls.get(a).getY()+45);
+					addBalls.get(a).repaint();
 				}
-				balls.add(new Ball());
+				
 			}
 			
 			if(((balls.get(i)).getY() >= 350))
@@ -244,6 +231,7 @@ public class BallzMain extends JFrame implements ActionListener, Updatable
 						add(addB);
 					}
 				}
+
 			}
 			
 			if(balls.get(i).getY() <= 0)
@@ -251,6 +239,8 @@ public class BallzMain extends JFrame implements ActionListener, Updatable
 				balls.get(i).setDy(-((balls.get(i)).getDy()));
 			}
 		}
+		
+		
 		
 		
 		
@@ -288,24 +278,6 @@ public class BallzMain extends JFrame implements ActionListener, Updatable
 		}
 		
 	
-		
-		
-//		for(Ball b : balls)
-//		{
-//			
-//			
-//			
-//			b.updateBrick(bricks);
-//			for(int i = bricks.size() - 1; i >= 0; i--)
-//			{
-//				if(bricks.get(i).getHP() == 0)
-//				{
-//					remove(bricks.get(i));
-//					bricks.remove(bricks.get(i));
-//				}
-//			}
-//		}
-		
 		
 	}
 	
