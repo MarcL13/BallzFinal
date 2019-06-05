@@ -13,6 +13,7 @@ public class AddBalls extends JComponent implements Updatable
 	private Ellipse2D.Double addBall;
 	private int x;
 	private int y;
+	private int dy = 10;
 		
 	public AddBalls(int x,  int y) 
 	{
@@ -24,9 +25,19 @@ public class AddBalls extends JComponent implements Updatable
 		this.setSize(21, 21);
 	}
 	
+	public void setDy(int y)
+	{
+		dy = x;
+	}
+	
+	public int getDy()
+	{
+		return dy;
+	}
+	
 	public void update()
 	{
-		setLocation(getX(), getY() + 50);
+		setLocation(getX(), getY() + 45);
 	}
 	
 	public int getX()
@@ -39,11 +50,11 @@ public class AddBalls extends JComponent implements Updatable
 		return y;
 	}
 		
-//	public void paintComponent (Graphics g)
-//	{
-//		
-//		Graphics2D g2 = (Graphics2D) g;
-//		g2.draw(addBall);
-//		g2.fill(addBall);
-//	}
+	public void paintComponent (Graphics g)
+	{
+		
+		Graphics2D g2 = (Graphics2D) g;
+		g2.draw(addBall);
+		g2.fill(addBall);
+	}
 }

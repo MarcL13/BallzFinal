@@ -211,15 +211,15 @@ public class BallzMain extends JFrame implements ActionListener, Updatable
 				
 				for(Brick br : bricks)
 				{
-					br.update();
-					
-					
+					br.update();	
 				}
-				for(AddBalls ab : addBalls)
+				for(int a = 0; a < addBalls.size(); a++)
 				{
-					ab.update();
+					addBalls.get(a).update();
+					repaint();
+					
 				}
-				balls.add(new Ball());
+//				balls.add(new Ball());
 			}
 			if(((balls.get(i)).getY() >= 350))
 			{
